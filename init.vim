@@ -7,10 +7,12 @@ set wildmenu
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=**/coverage/*
-set wildignore+=**/node_modules/*
+set wildignore+=**node_modules/*
 set wildignore+=**/android/*
 set wildignore+=**/ios/*
 set wildignore+=**/.git/*
+
+set relativenumber
 
 call plug#begin('~/.vim/plugged')
 
@@ -27,7 +29,7 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 Plug 'onsails/lspkind-nvim'
-" Plug 'github/copilot.vim'
+Plug 'github/copilot.vim'
 Plug 'nvim-lua/lsp_extensions.nvim'
 
 " Plug 'nvim-lua/completion-nvim'
@@ -119,6 +121,7 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <silent> <C-t> :silent !tmux neww tmux-sessionizer<CR>
 " Probably rename this, because its straight silly to be a worktree.
 nnoremap <leader>; :lua require("theprimeagen.git-worktree").execute(vim.loop.cwd(), "just-build")<CR>
+nmap <leader><Tab> <c-^><cr>
 
 nnoremap <leader>vwh :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>bs /<C-R>=escape(expand("<cWORD>"), "/")<CR><CR>
@@ -195,9 +198,17 @@ augroup THE_PRIMEAGEN
     autocmd BufEnter,BufWinEnter,TabEnter *.rs :lua require'lsp_extensions'.inlay_hints{}
 augroup END
 
+" custom gitlense setup, see https://dev.to/jamestthompson3/neovim-tip-gitlens-31ml
+lua vim.api.nvim_command [[autocmd CursorHold * lua require'utils'.blameVirtText()]]
+lua vim.api.nvim_command [[autocmd CursorMoved * lua require'utils'.clearBlameVirtText()]]
+lua vim.api.nvim_command [[autocmd CursorMovedI * lua require'utils'.clearBlameVirtText()]]
+
+hi! link GitLens Comment
+
 lua << EOF
 local lspconfig = require("lspconfig")
 local null_ls = require("null-ls")
+require('telescope').setup{ defaults = { file_ignore_patterns = {"node_modules"} } }
 
 local buf_map = function(bufnr, mode, lhs, rhs, opts)
     vim.api.nvim_buf_set_keymap(
