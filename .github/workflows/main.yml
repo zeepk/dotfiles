@@ -16,4 +16,4 @@ jobs:
         uses: JamesIves/fetch-api-data-action@v2.1.0
         with:          
           endpoint: https://codey-bot.herokuapp.com/api/send
-          configuration: '{ "method": "POST", "headers": {"Content-Type": "application/json"}, "body": {"channelId": "933990639178252308", "message": "nice", "secret": "abc"} }'
+          configuration: '{ "method": "POST", "headers": {"Content-Type": "application/json"}, "body": {"channelId": "933990639178252308", "message": "nice", "secret": ${{ secrets.CODEYBOT_TOKEN }}} }'
