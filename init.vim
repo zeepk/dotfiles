@@ -16,6 +16,9 @@ set relativenumber
 
 call plug#begin('~/.vim/plugged')
 
+" theme
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+
 " Yes, I am a sneaky snek now
 Plug 'ambv/black'
 
@@ -27,7 +30,7 @@ Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'onsails/lspkind-nvim'
 Plug 'github/copilot.vim'
 Plug 'nvim-lua/lsp_extensions.nvim'
@@ -83,8 +86,14 @@ Plug 'sbdchd/neoformat'
 " should I try another status bar???
 "  Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 " Plug 'hoob3rt/lualine.nvim'
+Plug 'scrooloose/nerdtree'
+
+" commenting
+Plug 'tpope/vim-commentary'
 
 call plug#end()
+
+colorscheme gruvbox
 
 " Adding local modules
 let &runtimepath.=',' . expand("$HOME") . '/personal/harpoon/tmux'
@@ -100,6 +109,11 @@ let g:vim_apm_log = 1
 if executable('rg')
     let g:rg_derive_root='true'
 endif
+
+let g:NERDTreeChDirMode = 2  " Change cwd to parent node
+
+let g:NERDTreeMinimalUI = 1  " Hide help text
+let g:NERDTreeAutoDeleteBuffer = 1
 
 let loaded_matchparen = 1
 let mapleader = " "
@@ -162,6 +176,8 @@ nnoremap <leader>Y gg"+yG
 
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>N :NERDTreeFind<CR>
 
 " vim TODO
 nmap <Leader>tu <Plug>BujoChecknormal
