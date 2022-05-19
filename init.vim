@@ -91,6 +91,9 @@ Plug 'scrooloose/nerdtree'
 " commenting
 Plug 'tpope/vim-commentary'
 
+" floating terminal windows
+Plug 'voldikss/vim-floaterm'
+
 call plug#end()
 
 colorscheme gruvbox
@@ -155,6 +158,8 @@ nnoremap <leader>gll :let g:_search_term = expand("%")<CR><bar>:Gclog -- %<CR>:c
 nnoremap <leader>gln :cnext<CR>:call search(_search_term)<CR>
 nnoremap <leader>glp :cprev<CR>:call search(_search_term)<CR>
 nnoremap <leader>nf :!./scripts/format.py %
+
+nnoremap <leader>lg <cmd>FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazygit<cr>
 
 nnoremap <leader>x :silent !chmod +x %<CR>
 
