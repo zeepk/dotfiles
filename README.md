@@ -7,3 +7,4 @@ If you use these, prepare to be disappointed
 - [lazygit](https://github.com/jesseduffield/lazygit)
 - [speedtest cli](https://www.speedtest.net/apps/cli)
 - [lua](https://koenwoortman.com/lua-install-on-ubuntu/)
+- [typescript environment](https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c)
