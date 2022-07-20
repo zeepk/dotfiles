@@ -1,5 +1,10 @@
-## dotfiles
+# .dotfiles
 If you use these, prepare to be disappointed
+
+## Stolen from
+[@ThePrimeagen](https://github.com/ThePrimeagen) - link to [dotfiles repo](https://github.com/ThePrimeagen/.dotfiles)
+
+[@BashBunni](https://github.com/bashbunni) - link to [dotfiles repo](https://github.com/bashbunni/dotfiless)
 
 ## Things I have installed on my mac setups
 - [neovim nightly dev](https://thomasventurini.com/articles/install-neovim-05-in-ubuntu/)
