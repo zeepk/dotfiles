@@ -52,6 +52,7 @@ alias ibrew="arch -x86_64 /usr/local/bin/brew"
  alias mvpops="cd ~/Documents/dev/mvp && yarn server ops"
  alias mvpopsc="cd ~/Documents/dev/mvp && yarn ops"
  alias mvptest="cd ~/Documents/dev/mvp && yarn test"
+ alias gmain="git checkout main && git pull"
 
  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
