@@ -5,7 +5,7 @@ name: Discord Release Message
 # Controls when the workflow will run
 on:
   push:
-    branches: [ main ]
+    branches: [ "*" ]
 
 jobs:
   discord-message:
