@@ -18,3 +18,4 @@ If you use these, prepare to be disappointed
 - [lua](https://koenwoortman.com/lua-install-on-ubuntu/)
 - [typescript environment](https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c)
 - [mono](https://www.mono-project.com/download/stable/#download-lin) for use with OmniSharp for c# and .NET development
+- [clangformat](https://clang.llvm.org/docs/ClangFormat.html) for use with C programming
