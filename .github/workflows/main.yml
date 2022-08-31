@@ -13,4 +13,4 @@ jobs:
         uses: JamesIves/fetch-api-data-action@v2.1.0
         with:
           endpoint: https://codey-bot.herokuapp.com/api/workflows/send
-          configuration: '{ "method": "POST", "headers": {"Content-Type": "application/json"}, "body": {"channelId": "933990639178252308", "message": "Update pushed to my dotfiles repo: https://github.com/zeepk/dotfiles", "secret": "${{ secrets.CODEYBOT_TOKEN }}"} }'
+          configuration: '{ "method": "POST", "headers": {"Content-Type": "application/json"}, "body": {"channelId": "933990639178252308", "authId": "google-oauth2|112917971682285054260", "message": "Update pushed to my dotfiles repo: https://github.com/zeepk/dotfiles", "secret": "${{ secrets.CODEYBOT_TOKEN }}"} }'
