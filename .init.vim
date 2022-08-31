@@ -20,6 +20,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'rebelot/kanagawa.nvim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'wuelnerdotexe/vim-astro'
 
 " lsp Plugins
 " for typescript, see: https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c
@@ -127,6 +129,8 @@ vnoremap <leader>d "_d
 
 inoremap <C-c> <esc>
 
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
 fun! EmptyRegisters()
     let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
     for r in regs
@@ -144,6 +148,11 @@ nmap <leader>nn :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '>
 augroup highlight_yank
     autocmd!
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
+augroup END
+
+augroup fmt
+    autocmd!
+    autocmd BufWritePre * undojoin | Neoformat
 augroup END
 
 " custom gitlense setup, see https://dev.to/jamestthompson3/neovim-tip-gitlens-31ml
@@ -210,16 +219,6 @@ lspconfig.tsserver.setup(
             buf_map(bufnr, "n", "go", ":TSLspImportAll<CR>")
             on_attach(client, bufnr)
         end
-    }
-)
-null_ls.setup(
-    {
-        sources = {
-            null_ls.builtins.diagnostics.eslint_d,
-            null_ls.builtins.code_actions.eslint_d,
-            null_ls.builtins.formatting.prettier
-        },
-        on_attach = on_attach
     }
 )
 EOF

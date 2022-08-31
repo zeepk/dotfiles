@@ -53,6 +53,9 @@ alias ibrew="arch -x86_64 /usr/local/bin/brew"
  alias mvpopsc="cd ~/Documents/dev/mvp && yarn ops"
  alias mvptest="cd ~/Documents/dev/mvp && yarn test"
 
+ alias hello="gcc hello.c -o hello && ./hello"
+ alias hellov="gcc hello.c -o hello && valgrind --leak-check=yes ./hello"
+
  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
  export NVM_DIR="$HOME/.nvm"
