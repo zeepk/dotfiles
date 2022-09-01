@@ -20,6 +20,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'rebelot/kanagawa.nvim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'wuelnerdotexe/vim-astro'
 
 " lsp Plugins
 " for typescript, see: https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c
@@ -54,6 +56,10 @@ Plug 'tpope/vim-commentary'
 " floating terminal windows
 Plug 'voldikss/vim-floaterm'
 
+" .NET c#
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'dense-analysis/ale'
+
 call plug#end()
 
 " set default colorscheme/theme
@@ -65,6 +71,12 @@ endif
 
 let loaded_matchparen = 1
 let mapleader = " "
+
+let g:OmniSharp_server_stdio = 1
+let g:OmniSharp_server_use_mono = 0
+let g:ale_linters = {
+			\ 'cs': ['OmniSharp']
+			\}
 
 nnoremap <silent> Q <nop>
 nnoremap <leader>pp <cmd>Telescope find_files<cr>
@@ -138,8 +150,10 @@ augroup highlight_yank
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
 augroup END
 
-let wrap_result = 1
-let g:wrap_result = 1
+augroup fmt
+    autocmd!
+    autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
 " custom gitlense setup, see https://dev.to/jamestthompson3/neovim-tip-gitlens-31ml
 lua vim.api.nvim_command [[autocmd CursorHold * lua require'utils'.blameVirtText()]]
