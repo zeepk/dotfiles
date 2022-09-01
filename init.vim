@@ -57,8 +57,8 @@ Plug 'tpope/vim-commentary'
 Plug 'voldikss/vim-floaterm'
 
 " .NET c#
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'dense-analysis/ale'
+" Plug 'OmniSharp/omnisharp-vim'
+" Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -72,11 +72,11 @@ endif
 let loaded_matchparen = 1
 let mapleader = " "
 
-let g:OmniSharp_server_stdio = 1
-let g:OmniSharp_server_use_mono = 0
-let g:ale_linters = {
-			\ 'cs': ['OmniSharp']
-			\}
+" let g:OmniSharp_server_stdio = 1
+" let g:OmniSharp_server_use_mono = 0
+" let g:ale_linters = {
+" 			\ 'cs': ['OmniSharp']
+" 			\}
 
 nnoremap <silent> Q <nop>
 nnoremap <leader>pp <cmd>Telescope find_files<cr>
@@ -150,10 +150,10 @@ augroup highlight_yank
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
 augroup END
 
-augroup fmt
-    autocmd!
-    autocmd BufWritePre * undojoin | Neoformat
-augroup END
+" augroup fmt
+"     autocmd!
+"     autocmd BufWritePre * undojoin | Neoformat
+" augroup END
 
 " custom gitlense setup, see https://dev.to/jamestthompson3/neovim-tip-gitlens-31ml
 lua vim.api.nvim_command [[autocmd CursorHold * lua require'utils'.blameVirtText()]]
