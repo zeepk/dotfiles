@@ -31,7 +31,7 @@ Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'onsails/lspkind-nvim'
 Plug 'github/copilot.vim'
 Plug 'nvim-lua/lsp_extensions.nvim'
@@ -129,7 +129,7 @@ vnoremap <leader>d "_d
 
 inoremap <C-c> <esc>
 
-inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+" inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 fun! EmptyRegisters()
     let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
@@ -150,6 +150,7 @@ augroup highlight_yank
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
 augroup END
 
+" format on save
 augroup fmt
     autocmd!
     autocmd BufWritePre * undojoin | Neoformat
@@ -224,8 +225,6 @@ lspconfig.tsserver.setup(
 null_ls.setup(
     {
         sources = {
-            null_ls.builtins.diagnostics.eslint_d,
-            null_ls.builtins.code_actions.eslint_d,
             null_ls.builtins.formatting.prettier
         },
         on_attach = on_attach
