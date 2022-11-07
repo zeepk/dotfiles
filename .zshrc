@@ -41,7 +41,6 @@ alias ibrew="arch -x86_64 /usr/local/bin/brew"
  alias updateremotedotfiles="cp ~/.config/nvim/init.vim ./init.vim  && cp ~/.zshrc ./.zshrc && cp ~/.tmux.conf ./.tmux.conf"
  alias tms="tmux source-file ~/.tmux.config"
  alias gmain="git checkout main && git pull"
- alias py="python"
 
 alias mvp="cd ~/Documents/dev/mvp"
 alias wiki="cd ~/Documents/dev/mvp.wiki && git pull && nvim"

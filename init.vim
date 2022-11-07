@@ -16,12 +16,16 @@ set relativenumber
 
 call plug#begin('~/.vim/plugged')
 
+" temp
+Plug 'ThePrimeagen/vim-be-good'
+
 " themes
 Plug 'gruvbox-community/gruvbox'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'rebelot/kanagawa.nvim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'wuelnerdotexe/vim-astro'
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 
 " lsp Plugins
 " for typescript, see: https://jose-elias-alvarez.medium.com/configuring-neovims-lsp-client-for-typescript-development-5789d58ea9c
@@ -31,7 +35,7 @@ Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/nvim-cmp'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'onsails/lspkind-nvim'
 Plug 'github/copilot.vim'
 Plug 'nvim-lua/lsp_extensions.nvim'
@@ -44,6 +48,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'ThePrimeagen/harpoon'
 
 Plug 'flazz/vim-colorschemes'
 
@@ -58,7 +63,7 @@ Plug 'voldikss/vim-floaterm'
 
 " .NET c#
 " Plug 'OmniSharp/omnisharp-vim'
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -74,9 +79,15 @@ let mapleader = " "
 
 " let g:OmniSharp_server_stdio = 1
 " let g:OmniSharp_server_use_mono = 0
-let g:ale_linters = {
-			\ 'c': ['clang']
-			\}
+" let g:ale_linters = {
+" 			\ 'cs': ['OmniSharp']
+" 			\}
+
+map <C-s> <C-w>
+
+" stop c commands from yanking
+nnoremap c "_c
+xnoremap c "_c
 
 nnoremap <silent> Q <nop>
 nnoremap <leader>pp <cmd>Telescope find_files<cr>
@@ -97,8 +108,8 @@ nnoremap <Leader>ee oif err != nil {<CR>log.Fatalf("%+v\n", err)<CR>}<CR><esc>kk
 nnoremap <Leader>cpu a%" PRIu64 "<esc>
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>
 nnoremap <leader>gt <Plug>PlenaryTestFile
-nnoremap <leader>vwm :lua require("vim-with-me").init()<CR>
-nnoremap <leader>dwm :lua require("vim-with-me").disconnect()<CR>
+nnoremap <leader>m :lua require("harpoon.mark").add_file()<CR>
+nnoremap <leader>h :lua require("harpoon.ui").toggle_quick_menu()<CR>
 nnoremap <leader>gll :let g:_search_term = expand("%")<CR><bar>:Gclog -- %<CR>:call search(g:_search_term)<CR>
 nnoremap <leader>gln :cnext<CR>:call search(_search_term)<CR>
 nnoremap <leader>glp :cprev<CR>:call search(_search_term)<CR>
@@ -129,7 +140,7 @@ vnoremap <leader>d "_d
 
 inoremap <C-c> <esc>
 
-" inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 
 fun! EmptyRegisters()
     let regs=split('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/-"', '\zs')
@@ -150,11 +161,10 @@ augroup highlight_yank
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
 augroup END
 
-" format on save
-augroup fmt
-    autocmd!
-    autocmd BufWritePre * undojoin | Neoformat
-augroup END
+" augroup fmt
+"     autocmd!
+"     autocmd BufWritePre * undojoin | Neoformat
+" augroup END
 
 " custom gitlense setup, see https://dev.to/jamestthompson3/neovim-tip-gitlens-31ml
 lua vim.api.nvim_command [[autocmd CursorHold * lua require'utils'.blameVirtText()]]
@@ -225,6 +235,8 @@ lspconfig.tsserver.setup(
 null_ls.setup(
     {
         sources = {
+            null_ls.builtins.diagnostics.eslint_d,
+            null_ls.builtins.code_actions.eslint_d,
             null_ls.builtins.formatting.prettier
         },
         on_attach = on_attach
