@@ -92,8 +92,9 @@ xnoremap c "_c
 nnoremap <silent> Q <nop>
 nnoremap <leader>pp <cmd>Telescope find_files<cr>
 nnoremap <leader>ff <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>rr <cmd>Telescope resume<cr>
+nnoremap <leader>ww <cmd>Telescope grep_string<cr>
+vnoremap <leader>vv "zy:Telescope live_grep default_text=<C-r>z<cr>
 nnoremap <silent> <C-t> :silent !tmux neww tmux-sessionizer<CR>
 nmap <leader><Tab> <c-^><cr>
 
