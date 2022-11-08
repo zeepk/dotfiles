@@ -41,6 +41,9 @@ alias ibrew="arch -x86_64 /usr/local/bin/brew"
  alias updateremotedotfiles="cp ~/.config/nvim/init.vim ./init.vim  && cp ~/.zshrc ./.zshrc && cp ~/.tmux.conf ./.tmux.conf"
  alias tms="tmux source-file ~/.tmux.config"
  alias gmain="git checkout main && git pull"
+ alias py="python"
+ alias javaversion="sudo update-alternatives --config java"
+ alias bunreset="yeet node_modules && yeet bun.lockb && bun install"
 
 alias mvp="cd ~/Documents/dev/mvp"
 alias wiki="cd ~/Documents/dev/mvp.wiki && git pull && nvim"
@@ -55,15 +58,18 @@ alias wiki="cd ~/Documents/dev/mvp.wiki && git pull && nvim"
  alias mvpopsc="cd ~/Documents/dev/mvp && yarn ops"
  alias mvptest="cd ~/Documents/dev/mvp && yarn test"
 
+ alias class="cd ~/Documents/dev/school/cs414/g15"
+ alias hw="cd ~/Documents/dev/school/cs370"
  alias hello="gcc hello.c -o hello && ./hello"
  alias hellov="gcc hello.c -o hello && valgrind --leak-check=yes ./hello"
 
  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
- export NVM_DIR="$HOME/.nvm"
- [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
- [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
- export NVM_DIR="$HOME/.nvm"
+# nvm lagging on wsl2 - https://github.com/microsoft/WSL/issues/4498#issuecomment-614856847
+ # export NVM_DIR="$HOME/.nvm"
+ # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+ # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+ # export NVM_DIR="$HOME/.nvm"
 
  export GOROOT=/usr/local/go
  export GOPATH=$HOME/go
@@ -75,3 +81,4 @@ alias wiki="cd ~/Documents/dev/mvp.wiki && git pull && nvim"
 # Bun
 export BUN_INSTALL="/home/zeepk/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
