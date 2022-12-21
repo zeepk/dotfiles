@@ -226,7 +226,7 @@ vim.keymap.set('n', '<leader>lg', ':FloatermNew --autoclose=2 --height=0.9 --wid
 vim.keymap.set('n', '<leader>m', require('harpoon.mark').add_file, { desc = 'Add file to harpoon' })
 vim.keymap.set('n', '<leader>h', require('harpoon.ui').toggle_quick_menu, { desc = 'Open harpoon menu' })
 
-  -- vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+-- vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -336,14 +336,18 @@ local on_attach = function(_, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
 
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    if vim.lsp.buf.format then
-      vim.lsp.buf.format()
-    elseif vim.lsp.buf.formatting then
-      vim.lsp.buf.formatting()
-    end
-  end, { desc = 'Format current buffer with LSP' })
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = vim.api.nvim_create_augroup("format_on_save", { clear = true }),
+    pattern = "*",
+    desc = "Run LSP formatting on a file on save",
+    callback = function()
+      if vim.lsp.buf.format then
+        vim.lsp.buf.format()
+      elseif vim.lsp.buf.formatting then
+        vim.lsp.buf.formatting()
+      end
+    end,
+  })
 end
 
 -- Setup mason so it can manage external tooling
@@ -427,4 +431,3 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-
