@@ -46,12 +46,14 @@ require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
   use 'voldikss/vim-floaterm'
   use 'github/copilot.vim'
+  use 'danishprakash/nvim-blameline'
 
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  use 'ThePrimeagen/harpoon' -- quickly manage file jumping
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
@@ -194,6 +196,8 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
+    file_ignore_patterns = { 'node_modules' },
+    path_display = { 'shorten' },
   },
 }
 
@@ -218,8 +222,9 @@ vim.keymap.set('n', '<leader>ff', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>rr', require('telescope.builtin').resume, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
--- vim.keymap.set('n', '<leader>lg', vim.cmd('FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazygit'), { expr = true, silent = true })
 vim.keymap.set('n', '<leader>lg', ':FloatermNew --autoclose=2 --height=0.9 --width=0.9 lazygit<CR>')
+vim.keymap.set('n', '<leader>m', require('harpoon.mark').add_file, { desc = 'Add file to harpoon' })
+vim.keymap.set('n', '<leader>h', require('harpoon.ui').toggle_quick_menu, { desc = 'Open harpoon menu' })
 
   -- vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 
