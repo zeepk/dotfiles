@@ -37,13 +37,10 @@ alias ibrew="arch -x86_64 /usr/local/bin/brew"
  alias tf="yarn nx run server:test-feature"
  alias tfc="yarn nx run server:test-feature-clean"
  alias tfhysa="yarn nx run server:test-feature --findRelatedTests=server/src/__tests__/feature/hysa/hysaRouter.test.ts"
- alias updatelocaldotfiles="cp ./init.vim ~/.config/nvim/init.vim && cp ./.zshrc ~/.zshrc && cp ./.tmux.conf ~/.tmux.conf && source ~/.zshrc"
- alias updateremotedotfiles="cp ~/.config/nvim/init.vim ./init.vim  && cp ~/.zshrc ./.zshrc && cp ~/.tmux.conf ./.tmux.conf"
+ alias updatelocaldotfiles="cp ./init.lua ~/.config/nvim/init.lua && cp ./.zshrc ~/.zshrc && cp ./.tmux.conf ~/.tmux.conf && source ~/.zshrc"
+ alias updateremotedotfiles="cp ~/.config/nvim/init.lua ./init.lua  && cp ~/.zshrc ./.zshrc && cp ~/.tmux.conf ./.tmux.conf"
  alias tms="tmux source-file ~/.tmux.config"
  alias gmain="git checkout main && git pull"
- alias py="python"
- alias javaversion="sudo update-alternatives --config java"
- alias bunreset="yeet node_modules && yeet bun.lockb && bun install"
 
 alias mvp="cd ~/Documents/dev/mvp"
 alias wiki="cd ~/Documents/dev/mvp.wiki && git pull && nvim"
@@ -57,19 +54,38 @@ alias wiki="cd ~/Documents/dev/mvp.wiki && git pull && nvim"
  alias mvpops="cd ~/Documents/dev/mvp && yarn server ops"
  alias mvpopsc="cd ~/Documents/dev/mvp && yarn ops"
  alias mvptest="cd ~/Documents/dev/mvp && yarn test"
+ decrypt() {
+  TOKEN=$1
+  if [[ $1 == enc\$* ]]
+  then
+    TOKEN=$(echo $1 | cut -c5-)
+  fi
+  yarn nx run token-storage:decrypt --proj $2 --data $TOKEN
+}
 
- alias class="cd ~/Documents/dev/school/cs414/g15"
- alias hw="cd ~/Documents/dev/school/cs370"
+ds() {
+  decrypt $1 ms-eng-shared-webstack-staging
+}
+
+dp() {
+  decrypt $1 ms-eng-shared-webstack-prod
+}
+
+dd() {
+  decrypt $1 ms-eng-sre-webstack-sandbox
+}
+
+ alias t4r="cd ~/Documents/dev/free-4runner-stuff && git checkout main && git pull && go run ."
+
  alias hello="gcc hello.c -o hello && ./hello"
  alias hellov="gcc hello.c -o hello && valgrind --leak-check=yes ./hello"
 
  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# nvm lagging on wsl2 - https://github.com/microsoft/WSL/issues/4498#issuecomment-614856847
- # export NVM_DIR="$HOME/.nvm"
- # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
- # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
- # export NVM_DIR="$HOME/.nvm"
+ export NVM_DIR="$HOME/.nvm"
+ [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+ [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+ export NVM_DIR="$HOME/.nvm"
 
  export GOROOT=/usr/local/go
  export GOPATH=$HOME/go
@@ -81,4 +97,3 @@ alias wiki="cd ~/Documents/dev/mvp.wiki && git pull && nvim"
 # Bun
 export BUN_INSTALL="/home/zeepk/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-
