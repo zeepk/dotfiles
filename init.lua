@@ -48,15 +48,14 @@ require('packer').startup(function(use)
   use 'github/copilot.vim'
   use 'danishprakash/nvim-blameline'
 
+  use 'sbdchd/neoformat' -- Formatting
   use 'navarasu/onedark.nvim' -- Theme inspired by Atom
+  use 'eddyekofo94/gruvbox-flat.nvim' -- Another gruvbox theme
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
   use 'ThePrimeagen/harpoon' -- quickly manage file jumping
-
-  -- Formatting
-  use 'sbdchd/neoformat'
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
