@@ -55,6 +55,9 @@ require('packer').startup(function(use)
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
   use 'ThePrimeagen/harpoon' -- quickly manage file jumping
 
+  -- Formatting
+  use 'sbdchd/neoformat'
+
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
 
@@ -336,17 +339,21 @@ local on_attach = function(_, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
 
+  vim.g.neoformat_try_node_exe = 1
   vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("format_on_save", { clear = true }),
     pattern = "*",
     desc = "Run LSP formatting on a file on save",
-    callback = function()
-      if vim.lsp.buf.format then
-        vim.lsp.buf.format()
-      elseif vim.lsp.buf.formatting then
-        vim.lsp.buf.formatting()
-      end
-    end,
+    command = "Neoformat",
+    -- if Neovim stops working, use lsp format:
+
+    --  callback = function()
+    -- if vim.lsp.buf.format then
+    -- vim.lsp.buf.format()
+    -- elseif vim.lsp.buf.formatting then
+    -- vim.lsp.buf.formatting()
+    -- end
+    -- end,
   })
 end
 
