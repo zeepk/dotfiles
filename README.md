@@ -4,6 +4,8 @@ If you use these, prepare to be disappointed
 
 ## Stolen from
 
+[Kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)
+
 [@ThePrimeagen](https://github.com/ThePrimeagen) - link to [dotfiles repo](https://github.com/ThePrimeagen/.dotfiles)
 
 [@BashBunni](https://github.com/bashbunni) - link to [dotfiles repo](https://github.com/bashbunni/dotfiless)
