@@ -228,6 +228,7 @@ vim.keymap.set('n', '<leader>lg', ':FloatermNew --autoclose=2 --height=0.9 --wid
 vim.keymap.set('n', '<leader>m', require('harpoon.mark').add_file, { desc = 'Add file to harpoon' })
 vim.keymap.set('n', '<leader>h', require('harpoon.ui').toggle_quick_menu, { desc = 'Open harpoon menu' })
 
+vim.keymap.set('n', '<leader><tab>', '<c-^><CR>', { desc = 'Switch to previous file' })
 -- vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 
 -- [[ Configure Treesitter ]]
@@ -284,7 +285,7 @@ require('nvim-treesitter.configs').setup {
     swap = {
       enable = true,
       swap_next = {
-        ['<leader>a'] = '@parameter.inner',
+        ['<leader>B'] = '@parameter.inner',
       },
       swap_previous = {
         ['<leader>A'] = '@parameter.inner',
