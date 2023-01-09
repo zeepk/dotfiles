@@ -55,6 +55,7 @@ require("packer").startup(
         use "sbdchd/neoformat" -- Formatting
         use "navarasu/onedark.nvim" -- Theme inspired by Atom
         use "eddyekofo94/gruvbox-flat.nvim" -- Another gruvbox theme
+        use "neanias/everforest-nvim"
         use "nvim-lualine/lualine.nvim" -- Fancier statusline
         use "lukas-reineke/indent-blankline.nvim" -- Add indentation guides even on blank lines
         use "numToStr/Comment.nvim" -- "gc" to comment visual regions/lines
@@ -132,7 +133,7 @@ vim.wo.signcolumn = "yes"
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme onedark]]
+vim.cmd [[colorscheme everforest]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
