@@ -26,7 +26,7 @@ alias ns="npm start"
 alias ys="yarn start"
 alias yr="yarn refresh"
 alias yt="yarn test"
-alias br="bun run start"
+alias br="bun run dev"
 alias yeet="rm -rf"
 alias la="ls -a"
 alias dev="cd ~/Documents/dev"
@@ -97,3 +97,4 @@ dd() {
 # Bun
 export BUN_INSTALL="/home/zeepk/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH=$PATH:$HOME/.local/bin

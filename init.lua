@@ -68,6 +68,22 @@ require("packer").startup(
         -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
         use {"nvim-telescope/telescope-fzf-native.nvim", run = "make", cond = vim.fn.executable "make" == 1}
 
+        -- color previews
+        use "NvChad/nvim-colorizer.lua"
+        use(
+            {
+                "roobert/tailwindcss-colorizer-cmp.nvim",
+                -- optionally, override the default options:
+                config = function()
+                    require("tailwindcss-colorizer-cmp").setup(
+                        {
+                            color_square_width = 2
+                        }
+                    )
+                end
+            }
+        )
+
         -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
         local has_plugins, plugins = pcall(require, "custom.plugins")
         if has_plugins then
@@ -172,7 +188,6 @@ vim.api.nvim_create_autocmd(
 require("lualine").setup {
     options = {
         icons_enabled = true,
-        theme = "onedark",
         component_separators = "|",
         section_separators = ""
     },
@@ -398,7 +413,17 @@ require("mason").setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = {"clangd", "eslint", "rust_analyzer", "pyright", "tsserver", "sumneko_lua", "gopls"}
+local servers = {
+    "jdtls",
+    "clangd",
+    "eslint",
+    "rust_analyzer",
+    "pyright",
+    "tsserver",
+    "sumneko_lua",
+    "gopls",
+    "tailwindcss"
+}
 
 -- Ensure the servers above are installed
 require("mason-lspconfig").setup {
@@ -474,3 +499,32 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+require("cmp").config.formatting = {
+    format = require("tailwindcss-colorizer-cmp").formatter
+}
+
+require("colorizer").setup {
+    filetypes = {"*"},
+    user_default_options = {
+        RGB = true, -- #RGB hex codes
+        RRGGBB = true, -- #RRGGBB hex codes
+        names = true, -- "Name" codes like Blue or blue
+        RRGGBBAA = false, -- #RRGGBBAA hex codes
+        AARRGGBB = false, -- 0xAARRGGBB hex codes
+        rgb_fn = false, -- CSS rgb() and rgba() functions
+        hsl_fn = false, -- CSS hsl() and hsla() functions
+        css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+        css_fn = false, -- Enable all CSS *functions*: rgb_fn, hsl_fn
+        -- Available modes for `mode`: foreground, background,  virtualtext
+        mode = "background", -- Set the display mode.
+        -- Available methods are false / true / "normal" / "lsp" / "both"
+        -- True is same as normal
+        tailwind = true, -- Enable tailwind colors
+        -- parsers can contain values used in |user_default_options|
+        sass = {enable = false, parsers = {css}}, -- Enable sass colors
+        virtualtext = "■"
+    },
+    -- all the sub-options of filetypes apply to buftypes
+    buftypes = {}
+}
