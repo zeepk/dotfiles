@@ -30,18 +30,18 @@ alias br="bun run dev"
 alias yeet="rm -rf"
 alias la="ls -a"
 alias dev="cd ~/Documents/dev"
+alias cs1="cd ~/Documents/dev/csu/cs415/t13"
+alias cs2="cd ~/Documents/dev/csu/cs475"
 alias python="python3"
 alias ibrew="arch -x86_64 /usr/local/bin/brew"
  alias mbrew="arch -arm64e /opt/homebrew/bin/brew"
  alias lg="lazygit"
- alias tf="yarn nx run server:test-feature"
- alias tfc="yarn nx run server:test-feature-clean"
- alias tfhysa="yarn nx run server:test-feature --findRelatedTests=server/src/__tests__/feature/routers/v1/form8974RouterV1.test.ts"
  alias updatelocaldotfiles="cp ./init.lua ~/.config/nvim/init.lua && cp ./.zshrc ~/.zshrc && cp ./.tmux.conf ~/.tmux.conf && source ~/.zshrc"
  alias updateremotedotfiles="cp ~/.config/nvim/init.lua ./init.lua  && cp ~/.zshrc ./.zshrc && cp ~/.tmux.conf ./.tmux.conf"
  alias tms="tmux source-file ~/.tmux.config"
  alias gmain="git checkout main && git pull"
 
+# BEGIN work stuff
 alias mvp="cd ~/Documents/dev/mvp"
 alias wiki="cd ~/Documents/dev/mvp.wiki && git pull && nvim"
  alias localproxy="~/Documents/dev/mvp/scripts/local_switch_proxy.sh"
@@ -54,6 +54,9 @@ alias wiki="cd ~/Documents/dev/mvp.wiki && git pull && nvim"
  alias mvpops="cd ~/Documents/dev/mvp && yarn server ops"
  alias mvpopsc="cd ~/Documents/dev/mvp && yarn ops"
  alias mvptest="cd ~/Documents/dev/mvp && yarn test"
+ alias tf="yarn nx run server:test-feature"
+ alias tfc="yarn nx run server:test-feature-clean"
+ alias tfhysa="yarn nx run server:test-feature --findRelatedTests=server/src/__tests__/feature/routers/v1/form8974RouterV1.test.ts"
  decrypt() {
   TOKEN=$1
   if [[ $1 == enc\$* ]]
@@ -74,6 +77,7 @@ dp() {
 dd() {
   decrypt $1 ms-eng-sre-webstack-sandbox
 }
+# END work stuff
 
  alias t4r="cd ~/Documents/dev/free-4runner-stuff && git checkout main && git pull && go run ."
 

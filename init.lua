@@ -54,6 +54,7 @@ require("packer").startup(
 
         use "sbdchd/neoformat" -- Formatting
         use "navarasu/onedark.nvim" -- Theme inspired by Atom
+        use {"catppuccin/nvim", as = "catppuccin"}
         use "eddyekofo94/gruvbox-flat.nvim" -- Another gruvbox theme
         use "neanias/everforest-nvim"
         use "nvim-lualine/lualine.nvim" -- Fancier statusline
@@ -194,7 +195,10 @@ require("lualine").setup {
     sections = {
         lualine_a = {"mode"},
         lualine_b = {"filetype"},
-        lualine_c = {{"filename", path = 1}}
+        lualine_c = {"filename"},
+        lualine_x = {"branch"},
+        lualine_y = {"progress"},
+        lualine_z = {"location"}
     }
 }
 
@@ -271,13 +275,14 @@ vim.keymap.set("n", "<leader><tab>", "<c-^><CR>", {desc = "Switch to previous fi
 -- vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
 --
 -- copy and paste to clipboard
+vim.opt.clipboard = "unnamedplus"
 vim.keymap.set({"n", "v"}, "<leader>y", '"*y', {noremap = true, silent = true})
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require("nvim-treesitter.configs").setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = {"c", "cpp", "go", "lua", "python", "rust", "typescript", "help"},
+    ensure_installed = {"astro", "c", "cpp", "go", "lua", "python", "rust", "typescript", "help"},
     highlight = {enable = true},
     indent = {enable = true},
     incremental_selection = {
@@ -419,7 +424,8 @@ local servers = {
     "tsserver",
     "sumneko_lua",
     "gopls",
-    "tailwindcss"
+    "tailwindcss",
+    "astro"
 }
 
 -- Ensure the servers above are installed
