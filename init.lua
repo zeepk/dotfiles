@@ -85,6 +85,17 @@ require("packer").startup(
             }
         )
 
+        -- surround
+        use(
+            {
+                "kylechui/nvim-surround",
+                tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+                config = function()
+                    require("nvim-surround").setup({})
+                end
+            }
+        )
+
         -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
         local has_plugins, plugins = pcall(require, "custom.plugins")
         if has_plugins then
