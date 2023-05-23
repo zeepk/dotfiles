@@ -102,3 +102,6 @@ dd() {
 export BUN_INSTALL="/home/zeepk/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH=$PATH:$HOME/.local/bin
+
+# bun completions
+[ -s "/usr/local/share/zsh/site-functions/_bun" ] && source "/usr/local/share/zsh/site-functions/_bun"

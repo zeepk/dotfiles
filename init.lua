@@ -9,6 +9,8 @@ end
 
 require("packer").startup(
     function(use)
+        use("dmmulroy/tsc.nvim")
+
         -- Package manager
         use "wbthomason/packer.nvim"
 
@@ -213,6 +215,9 @@ require("lualine").setup {
     }
 }
 
+-- Required for project-wide type checking
+require("tsc").setup()
+
 -- Enable Comment.nvim
 require("Comment").setup()
 
@@ -288,6 +293,7 @@ vim.keymap.set("n", "<leader><tab>", "<c-^><CR>", {desc = "Switch to previous fi
 -- copy and paste to clipboard
 vim.opt.clipboard = "unnamedplus"
 vim.keymap.set({"n", "v"}, "<leader>y", '"*y', {noremap = true, silent = true})
+vim.keymap.set("n", "c", '"_c', {desc = "Disables yanking to buffer on change"})
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
